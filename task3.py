@@ -14,7 +14,7 @@ def triangle():
 
 triangle()
 
-def sguare():
+def square():
     y = int(input("enter the length"))
     area = y * y
     print(area)
@@ -36,5 +36,5 @@ def circle():
          print(("area is small"))
     elif area <= 0 :
          print("invaild input")
-
+circle()
 
