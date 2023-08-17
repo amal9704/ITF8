@@ -11,16 +11,16 @@ def calculate_diff(numbers):
     if len(numbers) == 0:
         return 0
 
-    min_number = numbers[0]
-    max_number = numbers[0]
+    min_num = numbers[0]
+    max_num = numbers[0]
 
-    for number in numbers:
-        if number < min_number:
-            min_number = number
-        if number > max_number:
-            max_number = number
+    for num in numbers:
+        if num < min_num:
+            min_number = num
+        if num > max_num:
+            max_num = num
 
-    diff = max_number - min_number
+    diff = max_num - min_num
     return diff
 
 
