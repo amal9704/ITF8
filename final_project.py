@@ -69,6 +69,8 @@ def save_student_data():
     with open("student_data.txt", "w") as file:
         for student in students_list:
             student_data = student.get_student_details()
+            courses_data = [course.__dict__ for course in student.courses_list]
+            student_data['courses_list'] = courses_data
             file.write(str(student_data) + "\n")
 
 def load_student_data():
@@ -77,7 +79,12 @@ def load_student_data():
             lines = file.readlines()
             for line in lines:
                 student_data = eval(line)
-                new_student = Student(student_data['student_name'], student_data['student_age'], student_data['student_number'])
+                new_student = Student(student_data['student_name'], student_data['student_age'],
+                                      student_data['student_number'])
+                courses_data = student_data.get('courses_list', [])
+                for course_data in courses_data:
+                    new_course = Course(course_data['course_name'], course_data['course_mark'])
+                    new_student.enroll_course(new_course)
                 students_list.append(new_student)
     except FileNotFoundError:
         print("No student data file found")

@@ -1,1 +1,1 @@
-{'student_id': 271, 'student_name': 'amal', 'student_age': 18, 'student_number': '2201', 'courses_list': []}
+{'student_id': 159, 'student_name': 'amal', 'student_age': 18, 'student_number': '2201', 'courses_list': [{'course_id': 349, 'course_name': 'itf', 'course_mark': 90}, {'course_id': 439, 'course_name': 'management', 'course_mark': 85}]}
