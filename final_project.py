@@ -38,13 +38,22 @@ class Student:
         self.courses_list.append(course)
 
     # method to get_student_details as dict
-    def get_student_details(self):
-        return self.__dict__
 
+    @property
+    def get_student_details(self):
+        student_data = self.__dict__
+        courses_data = []
+        for course in self.courses_list:
+            if isinstance(course, Course):
+                courses_data.append(course.__dict__)
+            else:
+                courses_data.append(course)
+        student_data['courses_list'] = courses_data
+        return student_data
     # method to get_student_courses
     def get_student_courses(self):
         for course in self.courses_list:
-            print(f"Course: {course.course_name}, Mark: {course.course_mark}")
+            print(f"Course: {course['course_name']}, Mark: {course['course_mark']}")
 
     # method to get student_average as a value
     def get_student_average(self):
@@ -53,7 +62,7 @@ class Student:
         if num_courses == 0:
             return 0
         for course in self.courses_list:
-            total_marks += course.course_mark
+            total_marks += course['course_mark']
         return total_marks / len(self.courses_list)
 
 # in Global Scope
@@ -68,10 +77,7 @@ def exit_program():
 def save_student_data():
     with open("student_data.txt", "w") as file:
         for student in students_list:
-            student_data = student.get_student_details()
-            courses_data = [course.__dict__ for course in student.courses_list]
-            student_data['courses_list'] = courses_data
-            file.write(str(student_data) + "\n")
+            file.write(str(student.get_student_details) + "\n")
 
 def load_student_data():
     try:
@@ -132,7 +138,7 @@ while True:
             for student in students_list:
                 if student.student_number == student_number:
                     print("Student Details:")
-                    print(student.get_student_details())
+                    print(student.get_student_details)
                     break
             else:
                 print("Student Not Found")
@@ -142,7 +148,6 @@ while True:
             for student in students_list:
                 if student.student_number == student_number:
                     average = student.get_student_average()
-                    print(f"Student Average: {average}")
                     if average == 0:
                         print("No courses found for the student.")
                     else:
